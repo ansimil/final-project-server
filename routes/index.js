@@ -3,7 +3,7 @@ const User = require("../models/User")
 
 router.get("/", (req, res, next) => {
   User.find()
-  .then(() => res.status(200))
+  .then(() => res.json("All good in here"))
   .catch(err => console.log(err))
 });
 
