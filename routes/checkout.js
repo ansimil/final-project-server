@@ -1,6 +1,6 @@
 require('dotenv').config()
 const router = require('express').Router()
-const stripe = require('stripe')("sk_test_51LmYdYFImYDXPJ37eBIv4lpGPv6N9c6AaPKknjxtMy8p3T9rjjxm0Fae6mtwuO3DCOl0TLvTiDhfqwDQv20IBGFD00LErTsPzV")
+const stripe = require('stripe')('sk_test_51LmYdYFImYDXPJ37eBIv4lpGPv6N9c6AaPKknjxtMy8p3T9rjjxm0Fae6mtwuO3DCOl0TLvTiDhfqwDQv20IBGFD00LErTsPzV')
 const { validateCartItems } = require('use-shopping-cart/utilities')
 const Module = require('../models/Module')
 
@@ -34,7 +34,7 @@ router.post("/checkout-session", async (req, res) => {
 
         const cartItems = req.body;
         const line_items = validateCartItems(products, cartItems);
-        // console.log(line_items)
+        console.log(line_items)
         const origin = process.env.NODE_ENV === 'production' ? req.headers.origin : 'http://localhost:3000'
     
         const params = {
