@@ -24,7 +24,7 @@ module.exports = (app) => {
   app.use(
     cors({
       credentials: true,
-      origin: ["http://localhost:3000", 'https://mdi-modular.cyclic.app']
+      origin: ["http://localhost:3000", 'https://mdi-modular.netlify.app']
     })
   );
 
