@@ -39,8 +39,4 @@ router.get("/modules", (req, res, next) => {
       .catch(err => console.log(err))
   })
 
-router.put('module/:moduleId/addtocart', (req, res, next) => {
-    
-})
-
   module.exports = router;

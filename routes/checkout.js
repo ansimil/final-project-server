@@ -3,6 +3,7 @@ const router = require('express').Router()
 const stripe = require('stripe')('sk_test_51LmYdYFImYDXPJ37eBIv4lpGPv6N9c6AaPKknjxtMy8p3T9rjjxm0Fae6mtwuO3DCOl0TLvTiDhfqwDQv20IBGFD00LErTsPzV')
 const { validateCartItems } = require('use-shopping-cart/utilities')
 const Module = require('../models/Module')
+const { isAuthenticated } = require('../middleware/jwt.middleware')
 
 
 router.get('/checkout-session/:sessionId', async (req, res) => {
@@ -58,6 +59,17 @@ router.post("/checkout-session", async (req, res) => {
         res.status(500).json({ statusCode: 500, message: error.message });
       }
 
+
+})
+
+router.put('/update-stock', isAuthenticated, (req, res, next) => {
+  const cartDetails = req.body
+  
+  Object.keys(cartDetails).map(key => {
+      Module.findOneAndUpdate({sku: key}, {$inc: { inStock: -cartDetails[key].quantity}})
+      .then(response => res.json(response.data))
+      .catch(err => console.log(err))
+  })
 
 })
 
