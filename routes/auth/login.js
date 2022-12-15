@@ -7,7 +7,7 @@ router.post('/login',  (req, res, next) => {
     const { email, password } = req.body;
    
     if (email === '' || password === '') {
-      res.status(400).json({ message: "Provide email and password." });
+      res.status(400).json({ message: "Please provide email and password." });
       return;
     }
    
@@ -36,7 +36,7 @@ router.post('/login',  (req, res, next) => {
           res.status(200).json({ authToken: authToken, cart });
         }
         else {
-          res.status(401).json({ message: "Your email or your password is incorrect" });
+          res.status(401).json({ message: "Your email or password is incorrect" });
         }
    
       })
