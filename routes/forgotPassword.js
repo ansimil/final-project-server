@@ -11,11 +11,13 @@ const saltRounds = 10;
 router.post('/forgotpassword', (req, res) => {
     if (!req.body.email) {
         res.status(400).json('email required')
+        return
     }
     User.findOne({email: req.body.email})
     .then((user) => {
         if (!user) {
             res.status(403).json('email does not exist in the database')
+            return
         }
         else {
             const token = crypto.randomBytes(20).toString('hex');
