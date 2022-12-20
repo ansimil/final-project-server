@@ -52,6 +52,7 @@ router.post('/forgotpassword', cors(), (req, res) => {
                 
                 transporter.sendMail(mailOptions, (err, res) => {
                     if (err) {
+                        console.log(err)
                         res.status(401).json('there was an error', err)
                     }
                     else {
