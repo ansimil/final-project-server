@@ -4,11 +4,13 @@ const User = require("../models/User");
 const router = require('express').Router();
 const nodemailer = require('nodemailer');
 require('dotenv').config();
+const cors = require("cors");
+
 const address = process.env.NODE_ENV == 'dev' ? 'http://localhost:3000' : 'https://mdi-modular.netlify.app'
 
 const saltRounds = 10;
 
-router.post('/forgotpassword', (req, res) => {
+router.post('/forgotpassword', cors(), (req, res) => {
     if (!req.body.email) {
         res.status(400).json('email required')
         return
@@ -48,7 +50,7 @@ router.post('/forgotpassword', (req, res) => {
                     + 'If you did not request this, simply ignore this email'
                 }
                 
-                transporter.sendMail(mailOptions, (err, response) => {
+                transporter.sendMail(mailOptions, (err, res) => {
                     if (err) {
                         res.status(401).json('there was an error', err)
                     }
@@ -58,13 +60,7 @@ router.post('/forgotpassword', (req, res) => {
                 })
             })
             .catch(err => console.log(err))
-            // user.update(
-            //     {  
-            //         $set: {
-            //             'resetPasswordToken': token,
-            //             'resetPasswordExpires': Date.now() + 3600000
-                        
-            // }});
+            
             
         }
     })
