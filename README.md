@@ -16,7 +16,7 @@ The goals of the website are two-fold:
 - A functioning e-commerce site for users to browse and purchase my modules
 - An admin tool for me to manage my inventory and customer orders
 
-As it is not possible for the public to access the admin side of the website, I have provided some screenshots here.
+As it is not possible for the public to access the admin side of the website, I have provided some screenshots [here](https://drive.google.com/drive/folders/1LvT3J3yMWmQ2xZf91f7EMupJT-x8AYCY?usp=sharing).
 
 ### Libraries, languages, skills etc.:
 
