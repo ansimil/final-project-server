@@ -85,6 +85,11 @@ router.post("/signup", (req, res, next) => {
           to: `${email}`,
           subject: 'Thanks for creating an MDI account!',
           template: 'signupEmailTemplate',
+          attachments: [{
+            filename: 'mdi-logo.png',
+            path: 'public/images/mdi-logo.png',
+            cid: 'mdilogo' //same cid value as in the html img src
+        }],
           context: {
             user: user
           }
