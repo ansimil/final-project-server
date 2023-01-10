@@ -10,6 +10,8 @@ const app = express();
 
 require("./config")(app);
 
+app.use(express.static(path.join(__dirname, 'public')))
+
 const index = require("./routes/index");
 app.use("/", index);
 
@@ -38,5 +40,6 @@ const forgotPassword = require("./routes/forgotPassword")
 app.use('/', forgotPassword)
 
 require("./error-handling")(app);
+
 
 module.exports = app;
