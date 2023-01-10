@@ -19,7 +19,6 @@ router.get("/modules", (req, res, next) => {
 
   router.put("/dashboard/:moduleId/edit", isAdmin, (req, res, next) => {
     const moduleId = req.params.moduleId
-    // console.log(req.body)
     Module.findByIdAndUpdate(moduleId, req.body.newModule, {new: true})
     .then(response => res.status(200).json(response))
     .catch(err => console.log(err))
@@ -33,7 +32,6 @@ router.get("/modules", (req, res, next) => {
   })
 
   router.post("/dashboard/add", isAdmin, (req, res, next) => {
-    // console.log(req.body)
       Module.create(req.body.newModule)
       .then(response => res.json(response))
       .catch(err => console.log(err))

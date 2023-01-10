@@ -1,0 +1,86 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MDI Modules</title>
+    <style>
+
+        h1, p {
+            color: black
+        }
+
+        p {
+            margin-bottom: 5vh;
+            font-size: 1rem;
+        }
+
+        .emailContainer {
+            width: 60vw;
+            min-height: 80vh;
+            background-color: black;
+        }
+
+        .emailInnerDiv {
+            width: 100% ;
+            background-color: white;
+            min-height: 70vh;
+            padding-left: 5vw;
+            padding-top: 5vh;
+
+        }
+
+        .logoDiv {
+            width: 100%
+        }
+
+
+        .logoText {
+            text-align: center;
+        }
+
+        .btn {
+            text-decoration: none;
+            background-color: white;
+            color: black;
+            border: black solid 2px;
+            padding: 15px;
+            font-size: 1rem
+        }
+
+        a {
+            color: black
+        }
+
+        .btn:hover {
+            background-color: black;
+            color: white
+        }
+
+        .pAboveBtn {
+            margin-bottom: 8.5vh
+        }
+
+    </style>
+</head>
+<body>
+    <div class="emailContainer">
+        <table class="logoDiv">
+            <tbody>
+            <tr class='logo'>
+                <td>
+        <p class="logoText"><img src='cid:unique@nodemailer.com' alt="MDI" width="200px" height="150px" align="middle"></p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="emailInnerDiv"> 
+            <h1>Hi {{user.firstName}}!</h1>
+            <p>Thanks for creating your MDI account!                
+            </p>
+            <p class="pAboveBtn">Check out our range of Eurorack modules.</p>
+            <a class="btn" href="https://mdi-modular.netlify.app/modules">Modules</a>
+        </div>
+    </div>
+</body>
+</html>

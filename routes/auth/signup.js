@@ -4,6 +4,27 @@ const Wishlist = require("../../models/Wishlist");
 const Cart = require("../../models/Cart"); 
 const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
+const path = require('path')
+var nodemailer = require('nodemailer');
+var hbs = require('nodemailer-express-handlebars');
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+      user: `${process.env.EMAIL_ADDRESS}`,
+      pass: `${process.env.EMAIL_PASSWORD}`
+  },
+})
+
+const handlebarOptions = {
+  viewEngine: {
+    extName: ".hbs",
+    partialsDir: path.resolve('./views'),
+    defaultLayout: false,
+  },
+  viewPath: path.resolve('./views'),
+  extName: ".hbs",
+}
 
 const saltRounds = 10;
 
@@ -31,7 +52,7 @@ router.post("/signup", (req, res, next) => {
     User.findOne({ email })
       .then((foundUser) => {
         if (foundUser) {
-          res.status(400).json({ messageUserExists: "User already exists." });
+          res.status(400).json({ message: "User already exists." });
           return;
         }
    
@@ -41,6 +62,9 @@ router.post("/signup", (req, res, next) => {
         return User.create({ email, password: hashedPassword, firstName, surname })
       })
       .then((createdUser) => {
+        if (!createdUser) {
+          return
+        }
         const { email, _id } = createdUser;
         const user = { email, _id, firstName };
         const payload = { _id, email, firstName };
@@ -50,7 +74,32 @@ router.post("/signup", (req, res, next) => {
         `${process.env.TOKEN_SECRET}`,
         { algorithm: 'HS256', expiresIn: "6h" }
         );
-        // console.log('authToken', authToken);
+
+        transporter.use('compile', hbs(handlebarOptions));
+        
+        var mailOptions = {
+          from: {
+            name: 'MDI Modular',
+            address: 'mdimodules@gmail.com'
+          },
+          to: `${email}`,
+          subject: 'Thanks for creating an MDI account!',
+          template: 'signupEmailTemplate',
+          context: {
+            user: user
+          }
+        };
+        transporter.sendMail(mailOptions, (err, response) => {
+          if (err) {
+              console.log(err)
+              res.status(401).json('there was an error')
+          }
+          else {
+              console.log(response)
+              res.status(200).json('signup email successful')
+          }
+        })
+
         const name = 'Wishlist'
           return Wishlist.create({name})
           .then(newWishlist =>{
