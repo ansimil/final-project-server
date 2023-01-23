@@ -9,7 +9,6 @@ const isAdmin = jwt({
  
  
 function getTokenFromHeaders (req) {
-  console.log(req) 
   if (req.headers.authorization && req.headers.authorization.split(" ")[0] === "Bearer" && req.body.user.isAdmin) {
 
     const token = req.headers.authorization.split(" ")[1];

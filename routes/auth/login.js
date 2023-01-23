@@ -31,8 +31,6 @@ router.post('/login',  (req, res, next) => {
             `${process.env.TOKEN_SECRET}`,
             { algorithm: 'HS256', expiresIn: "6h" }
           );
-        console.log('authToken', authToken);
-          console.log(cart)
           res.status(200).json({ authToken: authToken, cart });
         }
         else {

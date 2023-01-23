@@ -56,7 +56,6 @@ router.post('/forgotpassword', cors(), (req, res) => {
                         res.status(401).json('there was an error', err)
                     }
                     else {
-                        console.log(response)
                         res.status(200).json('password reset email sent')
                     }
                 })

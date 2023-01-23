@@ -100,7 +100,6 @@ router.post("/signup", (req, res, next) => {
               res.status(401).json('there was an error')
           }
           else {
-              console.log(response)
               res.status(200).json('signup email successful')
           }
         })
