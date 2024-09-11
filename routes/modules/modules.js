@@ -1,8 +1,10 @@
 const router = require('express').Router()
 const Module = require('../../models/Module')
 const { isAdmin } = require('../../middleware/isAdmin.middleware'); 
+const cors = require('cors');
 
-router.get("/modules", (req, res, next) => {
+
+router.get("/modules", cors(), (req, res, next) => {
     Module.find()
     .then(response => {
       res.status(200).json(response)  
